@@ -26,3 +26,5 @@ const galleryItemsMarkup = galleryItems.map(({ preview, original, description })
 galleryListEl.innerHTML = galleryItemsMarkup
 
 const simpleLightBox = new SimpleLightbox('.gallery__link', { captionsData: "alt", captionDelay: 250 });
+
+galleryListEl.style.listStyle = "none"
