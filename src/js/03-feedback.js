@@ -45,7 +45,7 @@ form.addEventListener('submit', onFormSubmit)
 function onFormSubmit(event) {
     event.preventDefault();
 
-    if (email.value === "" || message.value === ""){
+    if (email.value === "" || message.value.trim() === ""){
         const message = "Please fill in all the fields"
         return alert(message)
     }
