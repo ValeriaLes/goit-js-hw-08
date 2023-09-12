@@ -1,14 +1,16 @@
 import throttle from 'lodash.throttle'
 
-const form = document.querySelector('.feedback-form')
-const emailInput = document.querySelector('input[type="email"]')
-const messageInput = document.querySelector('textarea')
-const formData = {}
+const form = document.querySelector('.feedback-form');
+let formData = JSON.parse(localStorage.getItem("feedback-form-state")) || {};
+const { message, email } = form.elements;
+
 
 
 
 
 populateInputArea()
+
+
 
 form.addEventListener('input', throttle(onFormInput, 500))
 
@@ -19,15 +21,20 @@ function onFormInput (event) {
     
 }
 
+
+
 function populateInputArea () {
-    const savedFormData = JSON.parse(localStorage.getItem("feedback-form-state"))
  
-    
-    
-    if(savedFormData) {
-        emailInput.value = savedFormData.email
-        messageInput.value = savedFormData.message 
+     if(formData !== "") {
+        email.value = formData.email
+        message.value = formData.message 
         }
+    
+        if (email.value === 'undefined' || message.value === 'undefined') {
+            email.value = ""
+            message.value = ""
+        }
+    
 
     
 }
@@ -38,7 +45,7 @@ form.addEventListener('submit', onFormSubmit)
 function onFormSubmit(event) {
     event.preventDefault();
 
-    if (emailInput.value === "" || messageInput.value === ""){
+    if (email.value === "" || message.value === ""){
         const message = "Please fill in all the fields"
         return alert(message)
     }
@@ -46,4 +53,5 @@ function onFormSubmit(event) {
     event.target.reset()
     localStorage.removeItem("feedback-form-state");
 
+   
 }
