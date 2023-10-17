@@ -12,12 +12,12 @@ const player = new Player(iframe)
 player.on('timeupdate', throttle(timeUpDateFunc, 1000));
 
 function timeUpDateFunc (data) {
-    const currentTime = Math.round(data.seconds)
+    const currentTime = data.seconds
     localStorage.setItem("videoplayer-current-time", currentTime)
     
 
 }
-player.setCurrentTime(localStorage.getItem("videoplayer-current-time"))
+player.setCurrentTime(localStorage.getItem("videoplayer-current-time") || 0)
 
 
 
